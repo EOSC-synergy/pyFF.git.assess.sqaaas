@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.9
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/IdentityPython/pyFF:
+      branch: master
+      repo: https://github.com/IdentityPython/pyFF.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/IdentityPython/pyFF git:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-lilac-serval.sh
+        container: qc.acc_blurry-pear-butterfly
+  QC.Doc:
+    repos:
+      github.com/IdentityPython/pyFF find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-teal-harrier.sh
+        container: qc.doc_pasty-lilac-nightingale
+      github.com/IdentityPython/pyFF git:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-violet-dingo.sh
+        container: qc.doc_goopy-lilac-woodpecker
+      github.com/IdentityPython/pyFF markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-tangerine-panda.sh
+        container: qc.doc_tasty-corn-uakari
+      github.com/IdentityPython/pyFF restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.snippy-alizarin-caterpillar.sh
+        container: qc.doc_homely-sapphire-weasel
+  QC.Lic:
+    repos:
+      github.com/IdentityPython/pyFF licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-saffron-mouse.sh
+        container: qc.lic_cloudy-amaranth-deer
+  QC.Sec:
+    repos:
+      github.com/IdentityPython/pyFF bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-beige-mastiff.sh
+        container: qc.sec_woolly-fuchsia-baboon
+  QC.Sty:
+    repos:
+      github.com/IdentityPython/pyFF flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-denim-dachsbracke.sh
+        container: qc.sty_hazy-vermilion-mandrill
+  QC.Ver:
+    repos:
+      github.com/IdentityPython/pyFF get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-white-monster.sh
+        container: qc.ver_droopy-mauve-moose
+timeout: 5400
